@@ -19,3 +19,6 @@ traindata<-cbind(trainsubjects,trainactive,traindata)
 totaldata<-rbind(traindata,testdata)
 names(totaldata)[1]<-"subjects"
 names(totaldata)[2]<-"activity"
+totaldata<-totaldata[,c(1,2,2+grep("mean[(]|std[(]",features[[2]]))]
+names(totaldata)<-sub("[(][)]","",names(totaldata))
+names(totaldata)<-gsub("-","_",names(totaldata))
