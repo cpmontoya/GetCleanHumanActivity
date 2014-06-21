@@ -22,3 +22,6 @@ names(totaldata)[2]<-"activity"
 totaldata<-totaldata[,c(1,2,2+grep("mean[(]|std[(]",features[[2]]))]
 names(totaldata)<-sub("[(][)]","",names(totaldata))
 names(totaldata)<-gsub("-","_",names(totaldata))
+activities<-read.table("UCI HAR Dataset/activity_labels.txt")
+totaldata$activity<-activities[totaldata$activity,]$V2
+tidydata<-aggregate(totaldata[,-(1:2)],totaldata[,1:2],mean)
